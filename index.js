@@ -22,8 +22,6 @@ app.use(express.json());
 })();
 app.use(cors({ credentials: true }));
 
-
-app.use(errorHandler);
 app.use(notFound);
 app.listen(PORT, () => {
   console.log(`Express Server listening on port ${PORT} 😊`);
