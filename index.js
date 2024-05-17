@@ -6,7 +6,7 @@ import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 import cookieParser from "cookie-parser";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
-
+import productRoutes from "./routes/productsRoutes.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 import db from "./db/models/index.js";
@@ -21,8 +21,11 @@ app.use(express.json());
   }
 })();
 app.use(cors({ credentials: true }));
+app.use("/", productRoutes);
 
 app.use(notFound);
+app.use(errorHandler);
+
 app.listen(PORT, () => {
   console.log(`Express Server listening on port ${PORT} 😊`);
 });
