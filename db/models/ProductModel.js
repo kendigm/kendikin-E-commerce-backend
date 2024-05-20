@@ -1,15 +1,20 @@
-export default (sequelize, DataTypes) => {
-  const Product = sequelize.define("Product", {
+import { Sequelize, DataTypes } from "sequelize";
+import sequelize from "./db.js"; // Ensure the path is correct
+
+const Product = sequelize.define(
+  "Product",
+  {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     category: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     img: {
-      type: DataTypes.JSON,
+      type: DataTypes.JSONB, // To store image data as JSON
       allowNull: false,
     },
     price: {
@@ -20,7 +25,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-  });
+  },
+  {
+    timestamps: true,
+  }
+);
 
-  return Product;
-};
+export default Product;
