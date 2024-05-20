@@ -2,8 +2,7 @@ import cors from "cors";
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
-import Stripe from "stripe";
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+import stripe from "./routes/stripe.js";
 import cookieParser from "cookie-parser";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 import productRoutes from "./routes/productsRoutes.js";
@@ -32,6 +31,7 @@ app.use(express.json());
 
 app.use(cors({ credentials: true }));
 app.use("/", productRoutes);
+app.use("/api", stripe);
 
 app.use(notFound);
 app.use(errorHandler);
