@@ -4,7 +4,7 @@ import Product from "../db/models/ProductModel.js";
 
 const AddProduct = async (req, res, next) => {
   try {
-    let { title, category, img, price, size } = req.body;
+    let { title, category, img, price, size, quantity } = req.body;
 
     if (!title || !category || !img || !price || !size) {
       return res.status(400).json({
@@ -31,6 +31,7 @@ const AddProduct = async (req, res, next) => {
       title,
       category,
       img,
+      quantity,
       price,
       size,
     });
@@ -67,7 +68,7 @@ const getProduct = async (req, res, next) => {
 
 const updateProduct = async (req, res, next) => {
   try {
-    let { title, category, img, price, size } = req.body;
+    let { title, category, img, price, size, quantity } = req.body;
     if (!title || !category || !img || !price || !size) {
       return res.status(400).json({
         message: "Please provide all details of the product",
@@ -85,7 +86,7 @@ const updateProduct = async (req, res, next) => {
     };
 
     const updated = await Product.update(
-      { title, category, img, price, size },
+      { title, category, img, price, size, quantity },
       { where: { id: req.params.id } }
     );
 

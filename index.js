@@ -6,7 +6,7 @@ import stripe from "./routes/stripe.js";
 import cookieParser from "cookie-parser";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 import productRoutes from "./routes/productsRoutes.js";
-import sequelize from "./db/models/db.js"; // Ensure the correct path
+import sequelize from "./db/models/db.js";
 import { v2 as cloudinary } from "cloudinary";
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -17,12 +17,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cookieParser());
+app.use(cors());
 app.use(express.json());
 
 (async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync(); // Ensure all models are synced with the database
+    await sequelize.sync();
     console.log("Database connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);
@@ -30,7 +31,7 @@ app.use(express.json());
 })();
 
 app.use(cors({ credentials: true }));
-app.use("/", productRoutes);
+app.use("/api", productRoutes);
 app.use("/api", stripe);
 
 app.use(notFound);
