@@ -89,7 +89,7 @@ router.post("/create-checkout-session", async (req, res) => {
 
     // Send email on successful payment
     await sendEmail(
-      "zainwaseem9371@gmail.com", // Assuming you have the user's email in the request body
+      req.body.email,
       "Product",
       "Your Product is successfully ordered."
     );
@@ -100,8 +100,6 @@ router.post("/create-checkout-session", async (req, res) => {
     res.status(500).send({ error: "Something went wrong" });
   }
 });
-
-
 
 // router.post("/create-checkout-session", async (req, res) => {
 //   console.log(req.body.cartItems);

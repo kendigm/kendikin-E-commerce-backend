@@ -1,10 +1,9 @@
 import { Sequelize } from "sequelize";
 
 const databaseUrl =
-  "postgres://postgres.qnshoczrgybxoecmbygc:" +
-  encodeURIComponent("$J#*LvdUx_6K932") +
-  "@aws-0-ap-south-1.pooler.supabase.com:5432/postgres";
+  "postgres://postgres.eumxhfvgcfiagjvxuagi:CV$CwkFBz3ysbLY@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres";
 
+// CV$CwkFBz3ysbLY
 const sequelize = new Sequelize(databaseUrl, {
   dialect: "postgres",
   dialectOptions: {
