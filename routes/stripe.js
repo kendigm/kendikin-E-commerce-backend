@@ -23,7 +23,7 @@ router.post("/create-checkout-session", async (req, res) => {
             category: item.category, // You can add category as metadata
           },
         },
-        unit_amount: item.price,
+        unit_amount: item.price * 100, // Convert price to cents
       },
       quantity: dummyQuantity, // Use the dummy quantity number
     };
@@ -33,7 +33,7 @@ router.post("/create-checkout-session", async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       shipping_address_collection: {
-        allowed_countries: ["US", "CA", "PK", "IN", "BD"],
+        allowed_countries: ["US", "CA", "PK", "IN", "BD", "HK"],
       },
       shipping_options: [
         {
