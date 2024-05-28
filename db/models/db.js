@@ -1,9 +1,8 @@
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
+dotenv.config();
+const databaseUrl = process.env.STRIPE_SECRET_KEY;
 
-const databaseUrl =
-  "postgres://postgres.eumxhfvgcfiagjvxuagi:CV$CwkFBz3ysbLY@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres";
-
-// CV$CwkFBz3ysbLY
 const sequelize = new Sequelize(databaseUrl, {
   dialect: "postgres",
   dialectOptions: {
